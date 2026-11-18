@@ -7,6 +7,12 @@ const corridor = parsePuzzle("Corridor", [
   "#######",
 ]);
 
+Deno.test("only moves that push a crate count as pushes", () => {
+  const after = move(move(corridor, "right"), "right");
+  assertEquals(after.moves, 2);
+  assertEquals(after.pushes, 1);
+});
+
 Deno.test("walking onto floor moves the player and counts a move", () => {
   const after = move(corridor, "right");
   assertEquals(after.player, { x: 2, y: 1 });
